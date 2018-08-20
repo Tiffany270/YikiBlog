@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>Yiki'Blog</title>
+    <meta name="description" content="Free Responsive Html5 Css3 Templates ">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="../../public/css/zerogrid.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/menu.css">
+    <link rel="stylesheet" href="../../public/css/responsiveslides.css">
+    <link href="../../public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="../../public/js/jquery183.min.js"></script>
+    <script src="../../public/js/responsiveslides.min.js"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow
+            $("#slider").responsiveSlides({
+                auto: true,
+                pager: false,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+            <img src="http://storage.ie6countdown.com/assets/100/../../public/images/banners/warning_bar_0000_us.jpg"
+                 border="0" height="42" width="820"
+                 alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+        </a>
+    </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="../../public/js/html5.js"></script>
+    <script src="../../public/js/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="wrap-body">
+
+    <!--////////////////////////////////////Header-->
+    <header>
+        <div class="top-header">
+            <div class="zerogrid">
+                <nav id="menu-wrap">
+                    <div id="menu-trigger">Menu</div>
+                    <ul id="menu" style="display: none;">
+                        <li><a href="/">Home</a></li>
+                        <li>
+                            <a href="#">Categories</a>
+                            <ul>
+                                {% for category in categories %}
+                                <li>
+                                    <a href="/list?id={{category.id}}">{{category.name}}</a>
+                                </li>
+
+                                {% endfor %}
+                                <li>
+                                    <a href="#">Item 04</a>
+                                    <ul>
+                                        <li><a href="#">Item 41</a></li>
+                                        <li><a href="#">Item 42</a></li>
+                                        <li><a href="#">Item 43</a></li>
+                                        <li><a href="#">Item 44</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="single.html">About</a></li>
+                        <li><a href="/single?id=5b796d55ee77e61b3cd9df11">-->查看指南<--</a></li>
+
+
+                        {% if userInfo._id %}
+                        <li id="logout" style="display:block"><a href="#">退出登录</a></li>
+                        {% endif %}
+
+
+                        <li style="float:right !important">
+                            <form method="get" action="/search" id="search" class="f-right">
+                                <input name="q" type="text" size="40" placeholder="Search..."/>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="wrap-header">
+                <div class="row">
+                    <div class="col-full t-center">
+                        <div class="wrap-col"
+                             style="background:url(../../public/images/bg.jpg) no-repeat;background-position: 470px 45px;background-size: 30%">
+                            <div class="logo"><a href="#"><img src="../../public/images/logo.png"/></a></div>
+
+                            {% if userInfo.isAdmin %}
+                            <div class="tagline">你好管理员~ Admin <a href="/admin">点此进入后台管理页面</a></div>
+                            {% elseif userInfo._id %}
+                            <div class="tagline"> 欢迎你的到来~ {{userInfo.username}}</div>
+                            {% else %}
+                            <div class="tagline">Temporibus autem quibusdam et aut officiis</div>
+                            {% endif %}
+                            <div style=" margin-left: 540px;height: 145px">
+                                {% if !userInfo._id %}
+                                <div id="loginBox" style="float: left;">
+                                    <form action="">
+                                        姓名 <input name="username" type="text"/><br>
+                                        密码 <input name="password" type="text"/><br>
+                                        <span style="cursor: pointer;color: #111111;font-weight: bold;background: #ffffff">登录</span>
+                                        <a style="cursor: pointer;color: #111111;font-weight: bold;background: #ffffff">
+                                            &nbsp;&nbsp;马上注册</a>
+                                    </form>
+                                </div>
+
+
+                                <div id="registerBox" style="float: left;display: none">
+                                    <form action="">
+                                        姓名 <input type="text" name="username"/><br>
+                                        密码 <input type="text" name="password"/><br>
+                                        确认 <input type="text" name="repassword"/><br>
+                                        <span style="cursor: pointer;color: #111111;font-weight: bold;background: #ffffff">注册</span>
+                                        <a style="cursor: pointer;color: #111111;font-weight: bold;background: #ffffff">
+                                            &nbsp;&nbsp;点击登录</a>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider">
+                <!-- Slideshow -->
+                <div class="callbacks_container">
+                    <ul class="rslides" id="slider">
+                        <li>
+                            <img src="../../public/images/1.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="../../public/images/2.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="../../public/images/3.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="container">
+        <div class="wrap-container">
+            <div class="zerogrid">
+                <div class="row">
+                    <div id="main-content" class="col-2-3">
+                        <div class="wrap-content">
+                            <div class="row">
+                                <article>
+                                    <div class="art-header">
+                                        <div class="entry-title">
+                                            <a href="#">Post Format: Gallery</a>
+                                        </div>
+                                        <span>Posted on November 12, 2015</span>
+                                    </div>
+                                    <div class="art-content">
+                                        <div class="zoom-container">
+                                            <a href="single.html">
+                                                <img src="../../public/images/4.jpg"/>
+                                            </a>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt,
+                                            sapien nec aliquam viverra, libero elit euismod turpis, vel sollicitudin
+                                            nisi eros eget tortor.</p>
+
+                                        <div class="t-center"><a class="button button02" href="#">Read More</a></div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="row">
+                                <article>
+                                    <div class="art-header">
+                                        <div class="entry-title">
+                                            <a href="#">Template: Featured Image (No Sidebar Layout)</a>
+                                        </div>
+                                        <span>Posted on November 12, 2015</span>
+                                    </div>
+                                    <div class="art-content">
+                                        <div class="zoom-container">
+                                            <a href="single.html">
+                                                <img src="../../public/images/5.jpg"/>
+                                            </a>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt,
+                                            sapien nec aliquam viverra, libero elit euismod turpis, vel sollicitudin
+                                            nisi eros eget tortor.</p>
+
+                                        <div class="t-center"><a class="button button02" href="#">Read More</a></div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="row">
+                                {%for contents in content %}
+                                <div class="col-1-2">
+                                    <div class="wrap-col">
+                                        <article style="border:none;">
+                                            <div class="art-header">
+                                                <div class="entry-title">
+                                                    <a href="#">{{contents.title}}</a>
+                                                </div>
+                                                <span>Posted on {{contents.addTime|date('Y-m-d')}}</span>
+                                            </div>
+                                            <div class="art-content">
+                                                <div class="zoom-container">
+                                                    <a href="/single?id={{contents.id}}">
+                                                        <img src="../../public/images/{{loop.index+5}}.jpg"/>
+                                                    </a>
+                                                </div>
+                                                <p>{{contents.summary}}</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">企业网站模板</a></div>
+                    <div id="sidebar" class="col-1-3">
+                        <!---- Start Widget ---->
+                        <div class="widget wid-about">
+                            <div class="wid-header">
+                                <h5>ABOUT ME</h5>
+                            </div>
+                            <div class="wid-content">
+                                <img src="../../public/images/10.jpg"/>
+
+                                <p>There is only one kind of heroism in this world. After seeing the truth of life, Still love life.</p>
+                                <p>这个世界上只有一种英雄主义，就是看清生活的真相之后，依然热爱生活。</p>
+                                <p>MY Email:yiki270@foxmail.com</p>
+                            </div>
+                        </div>
+                        <!---- Start Widget ---->
+                        <div class="widget wid-follow">
+                            <div class="wid-header">
+                                <h5>FOLLOW ME</h5>
+                            </div>
+                            <div class="wid-content">
+                                <ul class="quick-link">
+                                    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                                    <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href=""><i class="fa fa-github"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!---- Start Widget ---->
+                        <div class="widget wid-post">
+                            <div class="wid-header">
+                                <h5>Latest Posts</h5>
+                            </div>
+                            <div class="wid-content">
+
+                                {%for contents in content %}
+
+                                <div class="post" style="overflow: hidden">
+                                    <div class="zoom-container">
+                                        <a href="/single?id={{contents.id}}">
+                                            <img src="../../public/images/{{loop.index+10}}.jpg"/>
+                                        </a>
+                                    </div>
+                                    <div class="wrapper">
+                                        <h5 class="vid-name"><a href="/single?id={{contents.id}}">{{contents.title}}</a></h5>
+
+                                        <div class="info">
+                                            <h6>By <a href="#">Yiki</a></h6>
+                                            <span><i class="fa fa-calendar"></i>{{contents.addTime|date('Y/m/d')}}</span>
+                                            <span><i class="fa fa-heart"></i>{{contents.views}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!---- Start Widget ---->
+                        <div class="widget wid-category">
+                            <div class="wid-header">
+                                <h5>CATEGORIES</h5>
+                            </div>
+                            <div class="wid-content">
+                                <ul>
+                                    {% for category in categories %}
+                                    <li>
+                                        <a href="/list?id={{category.id}}">{{category.name}}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!---- Start Widget ---->
+                        <div class="widget wid-subcribe">
+                            <div class="wid-header">
+                                <h5>SUBSCRIBE TO BLOG VIA EMAIL</h5>
+                            </div>
+                            <div class="wid-content">
+                                <p>Enter your email address to subscribe to this blog and receive notifications of new
+                                    posts by email.</p>
+                                <span>Join 4 other subscribers</span>
+
+                                <form method="get" action="/search" id="subcribe">
+                                    <input name="q" type="text" size="40" placeholder="Email Address"/>
+                                </form>
+                                <a class="button button03" href="#">SUBSCRIBE</a>
+                            </div>
+                        </div>
+                        <!---- Start Widget ---->
+                        <div class="widget wid-follow">
+                            <div class="wid-header">
+                                <h5>FOLLOW ME ON INSTAGRAM</h5>
+                            </div>
+                            <div class="wid-content">
+                                <div class="row">
+                                    <div class="col-1-3">
+                                        <div class="wrap-col">
+                                            <a href="#"><img src="../../public/images/15.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/16.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/17.jpg"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1-3">
+                                        <div class="wrap-col">
+                                            <a href="#"><img src="../../public/images/18.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/19.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/20.jpg"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1-3">
+                                        <div class="wrap-col">
+                                            <a href="#"><img src="../../public/images/21.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/22.jpg"/></a>
+                                            <a href="#"><img src="../../public/images/23.jpg"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="zerogrid">
+            <div class="wrap-footer t-center">
+                <div class="row">
+                    <div class="full">
+                        <ul class="quick-link">
+                            <li><a href="https://www.facebook.com/fanny.li.731572"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/Tiffany96270"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://github.com/Tiffany270"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                        <div class="copy-right">
+                            <p>By @yiki</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript">
+        $(function () {
+            if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
+                $('li').has('ul').mouseover(function () {
+                    $(this).children('ul').css('visibility', 'visible');
+                }).mouseout(function () {
+                    $(this).children('ul').css('visibility', 'hidden');
+                })
+            }
+
+            /* Mobile */
+            $("#menu-trigger").on("click", function () {
+                $("#menu").slideToggle();
+            });
+
+            // iPad
+            var isiPad = navigator.userAgent.match(/iPad/i) != null;
+            if (isiPad) $('#menu ul').addClass('no-transition');
+
+
+            var loginBox = $('#loginBox');
+            var registerBox = $('#registerBox');
+
+            loginBox.find('a').on('click', function () {
+                registerBox.show();
+                loginBox.hide();
+                $(".tagline").html('Temporibus autem quibusdam et aut officiis');
+            });
+
+            registerBox.find('a').on('click', function () {
+                loginBox.show();
+                registerBox.hide();
+                $(".tagline").html('Temporibus autem quibusdam et aut officiis');
+
+            });
+
+
+            registerBox.find('span').on('click', function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/api/user/register',
+                    data: {
+                        username: registerBox.find('[name="username"]').val(),
+                        password: registerBox.find('[name="password"]').val(),
+                        repassword: registerBox.find('[name="repassword"]').val()
+
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $(".tagline").html(result.message);
+                        if (result.code == 0) {
+                            //注册成功
+                            setTimeout(function () {
+                                loginBox.show();
+                                registerBox.hide();
+                            }, 1000);
+                        }
+                    }
+                });
+
+            })
+
+
+            loginBox.find('span').on('click', function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/api/user/login',
+                    data: {
+                        username: loginBox.find('[name="username"]').val(),
+                        password: loginBox.find('[name="password"]').val()
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result);
+                        if (result.code == 0) {
+                            window.location.reload();
+                        }
+                        else {
+                            $(".tagline").html(result.message)
+                        }
+
+                    }
+                });
+
+            })
+
+            //退出
+            $('#logout').on('click', function () {
+                $.ajax({
+                    url: '/api/user/logout',
+                    success: function (result) {
+                        if (!result.code) {
+                            window.location.reload();
+                        }
+                    }
+
+                })
+            });
+
+        });
+    </script>
+
+</div>
+</body>
+</html>
