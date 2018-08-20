@@ -1,0 +1,11 @@
+<!--继承模板-->
+{% extends 'layout.html' %}
+
+<!--继承占位的东西-->
+{% block main%}
+<div class="jumbotron">
+<h1>Hello,{{userInfo.username}}</h1>
+<p>进入后台管理</p>
+</div>
+
+{% endblock %}

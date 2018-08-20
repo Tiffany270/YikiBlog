@@ -1,0 +1,48 @@
+<!--继承模板-->
+{% extends 'layout.html' %}
+
+<!--继承占位的东西-->
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li><span>内容列表</span></li>
+</ol>
+
+<h3>内容列表</h3>
+
+
+{% include 'page_layout.html' %}
+<table class="table table-hover table-striped">
+    <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>CATEGORY</th>
+        <th>Views</th>
+        <th>Time</th>
+        <th>ACTION</th>
+    </tr>
+
+    {% for content in contents %}
+
+    <tr>
+        <td>{{content._id.toString()}}</td>
+        <td>{{content.title}}</td>
+        <td>{{content.category.name}}</td>
+        <td>{{content.views}}</td>
+        <td>{{content.addTime|date('Y-m-d')}}</td>
+        <td>
+            <a href="/admin/content/edit?id={{content._id.toString()}}">修改</a>
+            <a href="/admin/content/delete?id={{content._id.toString()}}">删除</a>
+        </td>
+
+    </tr>
+
+
+    {% endfor %}
+
+
+</table>
+
+{% include 'page_layout.html' %}
+
+{% endblock %}
